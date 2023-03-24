@@ -30,3 +30,4 @@ jobs:
         context: back
         push: true
         tags: ${{ env.REGISTRY }}/${{ env.ACTOR }}/${{ env.IMAGE_NAME }}:1.0.0
+        
