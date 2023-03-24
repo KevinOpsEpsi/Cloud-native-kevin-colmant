@@ -23,9 +23,6 @@ jobs:
         registry: ghcr.io
         username: ${{ env.ACTOR }}
         password: ${{ secrets.GITHUB_TOKEN }}
-  
-    - name: Push the image
-      run: docker push ${{ env.REGISTRY }}/${{ env.ACTOR }}/${{ env.IMAGE_NAME }}:1.0.0
 
     - name: Build and push
       uses: docker/build-push-action@v4
