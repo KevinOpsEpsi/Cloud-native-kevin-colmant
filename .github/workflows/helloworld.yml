@@ -21,5 +21,3 @@ jobs:
 
     - name: Push the image
       run: docker push ghcr.io/kevinopsepsi/back:1.0.0
-
-      
