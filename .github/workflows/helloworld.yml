@@ -9,9 +9,9 @@ jobs:
     runs-on: ubuntu-latest
     permissions: write-all
     env:
-    REGISTRY: ghcr.io
-    IMAGE_NAME: ${{ github.repository }}
-    ACTOR: ${{ github.actor }}
+      REGISTRY: ghcr.io
+      IMAGE_NAME: ${{ github.repository }}
+      ACTOR: ${{ github.actor }}
 
     steps:
     - name: Checkout the code
@@ -27,6 +27,6 @@ jobs:
         registry: ghcr.io
         username: ${{ env.ACTOR }}
         password: ${{ secrets.GITHUB_TOKEN }}
-
+  
     - name: Push the image
       run: docker push ${{ env.REGISTRY }}/${{ env.ACTOR }}/${{ env.IMAGE_NAME }}:1.0.0
