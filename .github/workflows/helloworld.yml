@@ -1,0 +1,15 @@
+name: helloword
+
+on:
+  push:
+      branches: ["main"]
+      
+jobs:
+  build:
+    runs-on : ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v3
+    - run: docker build -t back .
+      working-directory: back
+ 
