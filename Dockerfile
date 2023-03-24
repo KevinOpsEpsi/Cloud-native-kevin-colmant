@@ -1,10 +1,10 @@
-FROM python:3
+FROM docker.io/maven:adoptopenjdk
 
-WORKDIR /usr/src/app
+COPY pom.xml .
+COPY src ./src
 
-COPY requirements.txt ./
-RUN pip install --no-cache-dir -r requirements.txt
+RUN mvn verify
 
-COPY . .
+EXPOSE 8080
 
-CMD [ "python", "./your-daemon-or-script.py" ]
+ENTRYPOINT ["java", "-Xmx8m", "-Xms8m", "-jar", "/target/words.jar"]
