@@ -15,6 +15,7 @@ FROM alpine AS build-release-stage
 
 WORKDIR /
 
+COPY static ./static
 COPY --from=build-stage /docker-gs-ping /docker-gs-ping
 
 EXPOSE 80
