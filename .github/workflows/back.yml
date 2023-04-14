@@ -3,8 +3,8 @@ name: Docker build
 on:
   push:
     branches: [ "main" ]
-  paths:
-    - 'back/**'
+    paths:
+      - 'back/**'
 
 jobs:
   build:
