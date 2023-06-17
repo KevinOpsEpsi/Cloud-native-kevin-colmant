@@ -1,0 +1,38 @@
+name: Docker BUILD BLUR
+
+on:
+  push:
+    branches: [ "main" ]
+    paths:
+      - 'python/**'
+  
+jobs:
+  build:
+    env:
+      REGISTRY: ghcr.io
+      IMAGE_NAME: jean-baptiste-d/cloud-native-jeanbaptiste/
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - uses: dorny/paths-filter@v2
+        id: changes
+        with:
+          filters: |
+            python:
+              - 'python/**'
+      -        
+        name: Login to GitHub Container Registry
+        uses: docker/login-action@v2
+        with:
+          registry: ghcr.io
+          username: ${{ secrets.USER_REGISTRY }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      -         
+        name: Build and push python
+        if: steps.changes.outputs.python == 'true'
+        uses: docker/build-push-action@v4
+        with:
+          push: true
+          tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}python-blur:latest,${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}python-blur:1.0
+          context: ./python
